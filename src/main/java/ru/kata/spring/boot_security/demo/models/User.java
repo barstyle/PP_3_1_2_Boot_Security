@@ -11,7 +11,7 @@ public class User {
     private Long id;
 
     @Column(name = "first_name")
-    private String firstname;
+    private String firstName;
 
     @Column(name = "last_name")
     private String lastName;
@@ -23,7 +23,7 @@ public class User {
     }
 
     public User(String firstname, String lastName, String email) {
-        this.firstname = firstname;
+        this.firstName = firstname;
         this.lastName = lastName;
         this.email = email;
     }
@@ -36,12 +36,12 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -64,7 +64,7 @@ public class User {
     public String toString() {
         return "User{" +
                "id = " + id +
-               ", firstname = '" + firstname + '\'' +
+               ", firstname = '" + firstName + '\'' +
                ", lastName = '" + lastName + '\'' +
                ", email = '" + email + '\'' +
                '}';
