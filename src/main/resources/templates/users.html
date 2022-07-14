@@ -74,8 +74,8 @@
             <td th:text="${user.getFirstName()}">firstname</td>
             <td th:text="${user.getLastName()}">lastname</td>
             <td th:text="${user.getEmail()}">email</td>
-            <td><a class="btn btn-success" th:href="@{user/{id}/update-user(id=${user.getId()})}">edit</a></td>
-            <td><a class="btn btn-warning" th:href="@{user/{id}/delete-user(id=${user.getId()})}">delete</a></td>
+            <td><a class="btn btn-success" th:href="@{users/{id}/update-user(id=${user.getId()})}">edit</a></td>
+            <td><a class="btn btn-warning" th:href="@{users/{id}/delete-user(id=${user.getId()})}">delete</a></td>
         </tr>
         </tbody>
     </table>

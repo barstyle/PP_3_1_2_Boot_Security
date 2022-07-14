@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -23,30 +25,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                    .antMatchers("/", "/index", "/users").permitAll() // полный доступ
-                    .anyRequest().authenticated()
+        http.authorizeRequests()
+                .antMatchers("/", "/index").permitAll() // полный доступ
+                .anyRequest().authenticated()
                 .and()
-                    .formLogin().successHandler(successUserHandler)
+                .formLogin().successHandler(successUserHandler)
                 .loginPage("/login")
-                    .permitAll()
+                .permitAll()
                 .and()
-                    .logout()
-                    .permitAll();
+                .logout()
+                .permitAll();
     }
 
     // аутентификация inMemory
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
+        UserDetails user = User.builder()
                         .username("user")
-                        .password("user")
+                        .password("{noop}user")
                         .roles("USER")
                         .build();
 
-        return new InMemoryUserDetailsManager(user);
+        UserDetails admin = User.builder()
+                        .username("admin")
+                        .password("{noop}admin")
+                        .roles("ADMIN")
+                        .build();
+
+        return new InMemoryUserDetailsManager(List.of(admin, user));
     }
 }
