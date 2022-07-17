@@ -38,7 +38,11 @@ public class UsersControllers {
         if (bindingResult.hasErrors()) {
             return "users";
         }
-        usersService.save(addUser);
+        if (addUser.getId() == null) {
+            usersService.save(addUser);
+        } else {
+            usersService.update(addUser.getId(), addUser);
+        }
         return "redirect:/users";
     }
 

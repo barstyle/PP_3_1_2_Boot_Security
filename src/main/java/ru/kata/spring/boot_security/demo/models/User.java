@@ -1,12 +1,8 @@
 package ru.kata.spring.boot_security.demo.models;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "users")
@@ -28,6 +24,15 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id",
+                    referencedColumnName = "id"))
+    private Collection<Role> roles;
+
     public User() {
     }
 
@@ -43,6 +48,15 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    public User(Long id, String firstName, String lastName, String email, String password) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
+
 
     public Long getId() {
         return id;
@@ -84,13 +98,23 @@ public class User {
         this.password = password;
     }
 
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
+        return "User {" +
                "id = " + id +
-               ", firstname = '" + firstName + '\'' +
+               ", firstName = '" + firstName + '\'' +
                ", lastName = '" + lastName + '\'' +
                ", email = '" + email + '\'' +
+//               ", password = '" + "*".repeat(password.length()) + '\'' +
+               ", roles = " + roles +
                '}';
     }
 }
