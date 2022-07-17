@@ -21,7 +21,7 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", unique = true)
     private String password;
 
     @ManyToMany
@@ -108,13 +108,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "User {" +
-               "id = " + id +
-               ", firstName = '" + firstName + '\'' +
-               ", lastName = '" + lastName + '\'' +
-               ", email = '" + email + '\'' +
-//               ", password = '" + "*".repeat(password.length()) + '\'' +
-               ", roles = " + roles +
+        return "User{" +
+               "id=" + id +
+               ", firstName='" + firstName + '\'' +
+               ", lastName='" + lastName + '\'' +
+               ", email='" + email + '\'' +
                '}';
     }
 }

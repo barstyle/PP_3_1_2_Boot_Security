@@ -9,6 +9,36 @@
     <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
     <h2>User, welcome spring boot security page!</h2>
 </div>
+<div class="container">
+    <table class="table table-light">
+        <thead>
+        <tr class="table-secondary">
+            <th colspan="6">Your info:</th>
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+            <th th:text="id">id</th>
+            <th th:text="firstname">firstName</th>
+            <th th:text="lastname">lastName</th>
+            <th th:text="e-mail">email</th>
+            <th th:text="roles">roles</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:object="${user}">
+            <td th:text="${user.getId()}">id</td>
+            <td th:text="${user.getFirstName()}">firstname</td>
+            <td th:text="${user.getLastName()}">lastname</td>
+            <td th:text="${user.getEmail()}">email</td>
+            <td th:text="${user.getRoles}">role</td>
+<!--            <td><a class="btn btn-success" th:href="@{admin/user-{id}/update-user(id=${user.getId()})}">edit</a></td>-->
+<!--            <td><a class="btn btn-warning" th:href="@{admin/user-{id}/delete-user(id=${user.getId()})}">delete</a></td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 <div th:replace="fragments/footer :: footer"/>
 </html>

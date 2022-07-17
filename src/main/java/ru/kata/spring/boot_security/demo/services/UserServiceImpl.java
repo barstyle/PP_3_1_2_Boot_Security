@@ -9,6 +9,7 @@ import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repositories.UsersRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
@@ -56,5 +57,10 @@ public class UserServiceImpl implements UsersService {
     public void register(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
         usersRepository.save(user);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return usersRepository.findByEmail(email).orElse(new User());
     }
 }
